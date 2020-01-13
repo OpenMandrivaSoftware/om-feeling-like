@@ -1,0 +1,6 @@
+killall latte-dock &>/dev/null
+lookandfeeltool -a org.kde.breeze.desktop
+kwriteconfig5 --group KDE --key SingleClick false
+qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'while(panelIds.length) panelById(panelIds[0]).remove()'
+sleep 0.5s
+qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'loadTemplate("org.kde.plasma.desktop.defaultPanel")'

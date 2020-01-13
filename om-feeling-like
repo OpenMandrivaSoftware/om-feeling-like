@@ -1,0 +1,46 @@
+#!/bin/sh
+OURDIR="$(dirname $0)"
+
+usage() {
+	echo "Usage: $0 Preset"
+	echo "Where Preset is the preset to switch to."
+	echo "Available presets:"
+	ls "$OURDIR"/presets
+}
+
+if ! qdbus org.kde.plasmashell /PlasmaShell org.freedesktop.DBus.Peer.Ping; then
+	echo "This script needs to be run from a Plasma session." >&2
+	exit 1
+fi
+
+if [ -z "$1" ]; then
+	usage
+	exit 1
+fi
+
+PRESET="$OURDIR"/presets/"$1"
+
+if ! [ -e "$PRESET"/install ]; then
+	usage
+	exit 1
+fi
+
+if [ -e "$PRESET"/depends ]; then
+	DEPS=""
+	for i in $(cat "$PRESET"/depends); do
+		if ! rpm -q $i &>/dev/null; then
+			DEPS="$DEPS $i"
+		fi
+	done
+	if [ -n "$DEPS" ]; then
+		echo "In order to use the $1 preset, you have to install the following packages:"
+		echo "$DEPS"
+		echo "If you don't want to do this, cancel the permissions dialog."
+		if ! kdesu -c "dnf --refresh install $DEPS"; then
+			echo "Installing dependencies $DEPS failed." >&2
+			echo "Please check your network connection." >&2
+			exit 1
+		fi
+	fi
+fi
+. "$PRESET"/install

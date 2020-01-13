@@ -1,0 +1,11 @@
+killall latte-dock &>/dev/null
+lookandfeeltool -a org.openmandriva4.desktop
+kwriteconfig5 --group Icons --key Theme breeze-dark
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSize Normal
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSizeAuto true
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft MS
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight HIAX
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key library org.kde.breeze
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme Breeze
+kwriteconfig5 --group KDE --key SingleClick true
+qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'loadTemplate("org.openmandriva.plasma.desktop.defaultPanel")'
