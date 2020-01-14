@@ -1,4 +1,5 @@
 killall latte-dock &>/dev/null
+rm -f ~/.config/autostart/org.kde.latte-dock.desktop
 lookandfeeltool -a org.openmandriva4.desktop
 kwriteconfig5 --group Icons --key Theme Windows10
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSize Normal

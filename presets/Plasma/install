@@ -1,4 +1,5 @@
 killall latte-dock &>/dev/null
+rm -f ~/.config/autostart/org.kde.latte-dock.desktop
 lookandfeeltool -a org.kde.breeze.desktop
 kwriteconfig5 --group KDE --key SingleClick false
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'while(panelIds.length) panelById(panelIds[0]).remove()'
