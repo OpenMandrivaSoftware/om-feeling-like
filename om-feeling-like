@@ -44,3 +44,9 @@ if [ -e "$PRESET"/depends ]; then
 	fi
 fi
 . "$PRESET"/install
+
+cat <<EOF
+Configuration has been changed to $1.
+Please log out and back in, some changes take effect
+when applications are restarted.
+EOF
