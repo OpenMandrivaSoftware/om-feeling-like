@@ -25,13 +25,9 @@ launcher.writeConfig("showRecentApps", "true")
 launcher.writeConfig("showRecentDocs", "true")
 launcher.writeConfig("icon", "/usr/share/icons/openmandriva.svg")
 var search = panel.addWidget("org.kde.milou")
-var falkon = panel.addWidget("org.kde.plasma.icon")
-falkon.currentConfigGroup = ["Configuration"]
-falkon.writeConfig("url", "file:///usr/share/applications/org.kde.falkon.desktop")
-var dolphin = panel.addWidget("org.kde.plasma.icon")
-dolphin.currentConfigGroup = ["Configuration"]
-dolphin.writeConfig("url", "file:///usr/share/applications/org.kde.dolphin.desktop")
-panel.addWidget("org.kde.plasma.icontasks")
+var tasks = panel.addWidget("org.kde.plasma.icontasks")
+tasks.currentConfigGroup = ["General"]
+tasks.writeConfig("launchers", "applications:org.kde.falkon.desktop,applications:org.kde.dolphin.desktop")
 panel.addWidget("org.kde.plasma.panelspacer")
 var langIds = ["as",    // Assamese
                "bn",    // Bengali
