@@ -8,6 +8,7 @@ kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft MS
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight HIAX
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key library org.kde.kwin.aurorae
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme __aurorae__svg__K01
+kwriteconfig5 --file plasmarc --group Theme --key name Windows10
 kwriteconfig5 --group KDE --key SingleClick false
 qdbus org.kde.KWin /KWin org.kde.KWin.reconfigure
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'while(panelIds.length) panelById(panelIds[0]).remove()'
