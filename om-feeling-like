@@ -1,5 +1,6 @@
 #!/bin/sh
 OURDIR="$(dirname $0)"
+[ "$OURDIR" = "/usr/bin" ] && OURDIR=/usr/share/om-feeling-like
 
 usage() {
 	echo "Usage: $0 Preset"
