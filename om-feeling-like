@@ -46,6 +46,10 @@ if [ -e "$PRESET"/depends ]; then
 fi
 . "$PRESET"/install
 
+# Restart plasmashell to make sure new configs are loaded
+kquitapp5 plasmashell
+kstart5 plasmashell
+
 cat <<EOF
 Configuration has been changed to $1.
 Please log out and back in, some changes take effect
