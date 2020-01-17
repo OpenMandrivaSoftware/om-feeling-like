@@ -52,6 +52,10 @@ void MainDialog::buttonClicked(QAbstractButton *button) {
 	else {
 		bool ok = switchPreset(selectedPreset());
 		if(ok) {
+			// Let's restart plasmashell to reload icons in kicker...
+			if(QProcess::execute("/usr/bin/kquitapp5", QStringList() << "plasmashell") == 0)
+				QProcess::execute("/usr/bin/kstart5", QStringList() << "plasmashell");
+			// But logging out and back in is a good idea anyway
 			QMessageBox::information(this, tr("Preset switched"), tr("The preset has been switched to %1. Since not all applications automatically reload all settings, you may have to log out and back in to see all effects.").arg(selectedPreset()));
 		} else {
 			QMessageBox::warning(this, tr("Something went wrong..."), tr("Something went wrong while trying to switch to the %1 preset.\nPlease try installing dependencies (if any) manually.\nIf that doesn't help, please report a bug or find us on #openmandriva-cooker on irc.freenode.net.").arg(selectedPreset()));
