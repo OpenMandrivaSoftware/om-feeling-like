@@ -1,0 +1,10 @@
+[Desktop Entry]
+GenericName=Desktop preset selector
+Name=Desktop presets
+Exec=/usr/bin/om-feeling-like-ui
+X-KDE-StartupNotify=true
+Icon=om-feeling-like
+Type=Application
+Terminal=false
+Categories=Settings;Qt;KDE;
+OnlyShowIn=KDE;
