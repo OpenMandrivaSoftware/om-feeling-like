@@ -56,7 +56,8 @@ void MainDialog::buttonClicked(QAbstractButton *button) {
 			if(QProcess::execute("/usr/bin/kquitapp5", QStringList() << "plasmashell") == 0)
 				QProcess::execute("/usr/bin/kstart5", QStringList() << "plasmashell");
 			// But logging out and back in is a good idea anyway
-			QMessageBox::information(this, tr("Preset switched"), tr("The preset has been switched to %1. Since not all applications automatically reload all settings, you may have to log out and back in to see all effects.").arg(selectedPreset()));
+			if(QMessageBox::information(this, tr("Preset switched"), tr("The preset has been switched to %1. Since not all applications automatically reload all settings, you may have to log out and back in to see all effects.\nDo you wish to log out now?").arg(selectedPreset()), QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes)
+				QProcess::execute("/usr/bin/qdbus", QStringList() << "org.kde.ksmserver" << "/KSMServer" << "org.kde.KSMServerInterface.logout" << "0" << "0" << "0");
 		} else {
 			QMessageBox::warning(this, tr("Something went wrong..."), tr("Something went wrong while trying to switch to the %1 preset.\nPlease try installing dependencies (if any) manually.\nIf that doesn't help, please report a bug or find us on #openmandriva-cooker on irc.freenode.net.").arg(selectedPreset()));
 		}
