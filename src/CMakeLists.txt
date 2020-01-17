@@ -1,0 +1,8 @@
+find_package(Qt5 5.0 COMPONENTS Core Widgets REQUIRED)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+add_definitions(-DPREFIX=\"${CMAKE_INSTALL_PREFIX}\")
+set(SOURCES RTPushButton.cpp MainDialog.cpp Rpm.cpp main.cpp)
+add_executable(om-feeling-like-ui ${SOURCES})
+qt5_use_modules(om-feeling-like-ui Core Widgets)
+install(TARGETS om-feeling-like-ui DESTINATION bin)
