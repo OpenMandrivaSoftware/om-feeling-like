@@ -1,8 +1,9 @@
 killall latte-dock &>/dev/null
 rm -f ~/.config/autostart/org.kde.latte-dock.desktop
+qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'theme="breeze-light"'
+kwriteconfig5 --file plasmarc --group Theme --key name breeze
 lookandfeeltool -a org.openmandriva4.desktop
-kwriteconfig5 --file plasmarc --group Theme --key name breeze-dark
-kwriteconfig5 --group Icons --key Theme breeze-dark
+kwriteconfig5 --group Icons --key Theme breeze
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSize Normal
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSizeAuto true
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft MS
