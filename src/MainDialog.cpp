@@ -14,8 +14,8 @@ MainDialog::MainDialog(QWidget *parent):QDialog(parent),_layout(this) {
 		presets.removeAll("OpenMandriva");
 		presets.prepend("OpenMandriva");
 	}
-	int width = sqrt(presets.count());
-	int height = ceil(sqrt(presets.count()));
+	int width = sqrtf(presets.count());
+	int height = ceilf(static_cast<float>(presets.count())/width);
 
 	_label = new QLabel(tr("Old habits are hard to break - fortunately with OpenMandriva you don't have to: You can configure your desktop to look and feel similar to other systems you may be used to."), this);
 	_layout.addWidget(_label, 0, 0, 1, width);
