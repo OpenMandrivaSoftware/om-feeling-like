@@ -15,13 +15,16 @@ MainDialog::MainDialog(QWidget *parent):QDialog(parent),_layout(this) {
 		presets.prepend("OpenMandriva");
 	}
 	int width = sqrt(presets.count());
+	int height = ceil(sqrt(presets.count()));
 
 	_label = new QLabel(tr("Old habits are hard to break - fortunately with OpenMandriva you don't have to: You can configure your desktop to look and feel similar to other systems you may be used to."), this);
 	_layout.addWidget(_label, 0, 0, 1, width);
 
 
-	for(int y=0; y<width; y++) {
+	for(int y=0; y<height; y++) {
 		for(int x=0; x<width; x++) {
+			if(presets.length() <= y*width+x) // Can happen if the number of presets isn't a square number...
+				break;
 			RTPushButton *b;
 			QString const &p = presets.at(y*width+x);
 			_presets.insert(p, b = new RTPushButton(QUrl::fromLocalFile(PREFIX "/share/om-feeling-like/presets/" + p + "/description.html"), this));
@@ -36,7 +39,7 @@ MainDialog::MainDialog(QWidget *parent):QDialog(parent),_layout(this) {
 
 	_buttons = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Apply|QDialogButtonBox::Cancel, this);
 	connect(_buttons, &QDialogButtonBox::clicked, this, &MainDialog::buttonClicked);
-	_layout.addWidget(_buttons, width+1, 0, 1, width);
+	_layout.addWidget(_buttons, height+1, 0, 1, width);
 }
 
 void MainDialog::presetSelected() {
