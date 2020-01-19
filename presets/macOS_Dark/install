@@ -1,6 +1,6 @@
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'loadTemplate("org.openmandriva.plasma.desktop.globalMenuPanel")'
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'theme="McMojave"'
-kwriteconfig5 --file Kvantum/kvantum.kvconfig --group General --key theme McMojave
+kwriteconfig5 --file Kvantum/kvantum.kvconfig --group General --key theme KvMojave
 kwriteconfig5 --group KDE --key SingleClick false
 kwriteconfig5 --group KDE --key buttonOrder mac
 kwriteconfig5 --file plasmarc --group Theme --key name McMojave
