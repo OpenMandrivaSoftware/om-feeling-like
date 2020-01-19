@@ -9,6 +9,7 @@ kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft MS
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight HIAX
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key library org.kde.kwin.aurorae
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme __aurorae__svg__seven-black
+lwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme Windows10
 kwriteconfig5 --file plasmarc --group Theme --key name Windows10
 kwriteconfig5 --group KDE --key SingleClick false
 kwriteconfig5 --group KDE --key buttonOrder windows

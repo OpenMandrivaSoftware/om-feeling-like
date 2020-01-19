@@ -5,4 +5,5 @@ kwriteconfig5 --group KDE --key SingleClick false
 kwriteconfig5 --group KDE --key buttonOrder mac
 kwriteconfig5 --file plasmarc --group Theme --key name McMojave
 lookandfeeltool -a com.github.vinceliuice.McMojave
+lwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme McMojave-circle
 latte-dock&

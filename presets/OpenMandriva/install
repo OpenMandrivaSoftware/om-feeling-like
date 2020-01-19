@@ -10,6 +10,7 @@ kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft MS
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight HIAX
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key library org.kde.breeze
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme Breeze
+lwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme breeze_cursors
 kwriteconfig5 --group KDE --key buttonOrder --delete
 kwriteconfig5 --group KDE --key SingleClick true
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'loadTemplate("org.openmandriva.plasma.desktop.defaultPanel")'

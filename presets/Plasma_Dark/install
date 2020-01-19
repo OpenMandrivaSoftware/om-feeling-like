@@ -5,6 +5,7 @@ kwriteconfig5 --group KDE --key buttonOrder --delete
 kwriteconfig5 --file plasmarc --group Theme --key name default
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'theme="breeze-dark"'
 lookandfeeltool -a org.kde.breezedark.desktop
+lwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme breeze_cursors
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'while(panelIds.length) panelById(panelIds[0]).remove()'
 sleep 0.5s
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'loadTemplate("org.kde.plasma.desktop.defaultPanel")'
