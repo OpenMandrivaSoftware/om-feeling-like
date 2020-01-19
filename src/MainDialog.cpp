@@ -8,14 +8,17 @@
 
 MainDialog::MainDialog(QWidget *parent):QDialog(parent),_layout(this) {
 	QDir presetDir(PREFIX "/share/om-feeling-like/presets");
-	QStringList presets=presetDir.entryList(QDir::Dirs|QDir::NoDot|QDir::NoDotDot, QDir::Name);
-	// First things first...
-	if(presets.contains("OpenMandriva")) {
-		presets.removeAll("OpenMandriva");
-		presets.prepend("OpenMandriva");
+	for(QString const &p : presetDir.entryList(QDir::Dirs|QDir::NoDot|QDir::NoDotDot, QDir::Name)) {
+		if(p.endsWith("_Dark"))
+			continue;
+		// First things first...
+		if(p == "OpenMandriva")
+			_presets.prepend(p);
+		else
+			_presets.append(p);
 	}
-	int width = sqrtf(presets.count());
-	int height = ceilf(static_cast<float>(presets.count())/width);
+	int width = sqrtf(_presets.count());
+	int height = ceilf(static_cast<float>(_presets.count())/width);
 
 	_label = new QLabel(tr("Old habits are hard to break - fortunately with OpenMandriva you don't have to: You can configure your desktop to look and feel similar to other systems you may be used to."), this);
 	_layout.addWidget(_label, 0, 0, 1, width);
@@ -23,11 +26,11 @@ MainDialog::MainDialog(QWidget *parent):QDialog(parent),_layout(this) {
 
 	for(int y=0; y<height; y++) {
 		for(int x=0; x<width; x++) {
-			if(presets.length() <= y*width+x) // Can happen if the number of presets isn't a square number...
+			if(_presets.length() <= y*width+x) // Can happen if the number of presets isn't a square number...
 				break;
 			RTPushButton *b;
-			QString const &p = presets.at(y*width+x);
-			_presets.insert(p, b = new RTPushButton(QUrl::fromLocalFile(PREFIX "/share/om-feeling-like/presets/" + p + "/description.html"), this));
+			QString const &p = _presets.at(y*width+x);
+			_presetButtons.insert(p, b = new RTPushButton(QUrl::fromLocalFile(PREFIX "/share/om-feeling-like/presets/" + p + "/description.html"), this));
 			if(x==0 && y==0) {
 				_current = b;
 				b->setDown(true);
@@ -37,9 +40,12 @@ MainDialog::MainDialog(QWidget *parent):QDialog(parent),_layout(this) {
 		}
 	}
 
+	_preferDark = new QCheckBox(tr("Use the dark version of the preset if available"), this);
+	_layout.addWidget(_preferDark, height+1, 0, 1, width);
+
 	_buttons = new QDialogButtonBox(QDialogButtonBox::Ok|QDialogButtonBox::Apply|QDialogButtonBox::Cancel, this);
 	connect(_buttons, &QDialogButtonBox::clicked, this, &MainDialog::buttonClicked);
-	_layout.addWidget(_buttons, height+1, 0, 1, width);
+	_layout.addWidget(_buttons, height+2, 0, 1, width);
 }
 
 void MainDialog::presetSelected() {
@@ -71,9 +77,15 @@ void MainDialog::buttonClicked(QAbstractButton *button) {
 }
 
 QString MainDialog::selectedPreset() const {
-	for(QMap<QString,RTPushButton*>::const_iterator it=_presets.begin(); it!=_presets.end(); ++it) {
-		if(_current == it.value())
-			return it.key();
+	for(QMap<QString,RTPushButton*>::const_iterator it=_presetButtons.begin(); it!=_presetButtons.end(); ++it) {
+		if(_current == it.value()) {
+			QString p = it.key();
+			if(_preferDark->isChecked()) {
+				if(QFile::exists(PREFIX "/share/om-feeling-like/presets/" + p + "_Dark"))
+					return p + "_Dark";
+			}
+			return p;
+		}
 	}
 	return QString();
 }

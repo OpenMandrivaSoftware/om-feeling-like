@@ -2,6 +2,7 @@
 #include <QDialog>
 #include <QLabel>
 #include <QMap>
+#include <QCheckBox>
 #include <QDialogButtonBox>
 #include <QGridLayout>
 #include "RTPushButton.h"
@@ -19,9 +20,11 @@ protected slots:
 	void presetSelected();
 	void buttonClicked(QAbstractButton*);
 protected:
+	QStringList			_presets;
 	QGridLayout			_layout;
 	QLabel *			_label;
-	QMap<QString,RTPushButton*>	_presets;
+	QMap<QString,RTPushButton*>	_presetButtons;
+	QCheckBox *			_preferDark;
 	QDialogButtonBox *		_buttons;
 	RTPushButton *			_current;
 };
