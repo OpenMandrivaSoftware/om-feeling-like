@@ -9,7 +9,7 @@ kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight HI
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key library org.kde.kwin.aurorae
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme __aurorae__svg__YaruKdeDark
 kwriteconfig5 --file kwinrc --group Windows --key Placement Maximizing
-lwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme Suru++
+kwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme Suru++
 kwriteconfig5 --file plasmarc --group Theme --key name Windows10
 kwriteconfig5 --group General --key widgetStyle kvantum
 kwriteconfig5 --file Kvantum/kvantum.kvconfig --group General --key theme KvAmbience
