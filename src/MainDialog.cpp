@@ -2,7 +2,9 @@
 #include "Rpm.h"
 #include <QDir>
 #include <QMessageBox>
+#include <QGuiApplication>
 #include <QProcess>
+#include <QCursor>
 #include <cmath>
 #include <iostream>
 
@@ -102,11 +104,17 @@ bool MainDialog::switchPreset(QString const &preset) {
 				deps.append(dep);
 		}
 		if(deps.count()) {
-			QMessageBox::information(this, tr("Additional packages needed"), tr("This preset depends on additional packages to be installed: %1.\nPlease allow installing them (root privileges needed) in the dialog that follows.").arg(deps.join(", ")));
-			if(QProcess::execute("/usr/bin/kdesu", QStringList() << "-t" << "-c" << ("dnf --refresh -y install " + deps.join(" "))) != 0)
+			QMessageBox::information(this, tr("Additional packages needed"), tr("This preset depends on additional packages to be installed: %1.\nDepending on your system configuration, you may now be asked to enter the root (admin) password to allow installing these packages.\nAfter confirming the password, that dialog will seem to hang for a while (while packages are being downloaded and installed). Give it a bit of time.").arg(deps.join(", ")));
+			QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+			bool installed = (QProcess::execute("/usr/bin/pkexec", QStringList() << "dnf" << "--refresh" << "-y" << "install" << deps) == 0);
+			QGuiApplication::restoreOverrideCursor();
+			if(!installed)
 				return false;
 		}
 		depFile.close();
 	}
-	return QProcess::execute(PREFIX "/bin/om-feeling-like", QStringList() << preset) == 0;
+	QGuiApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	bool ok = (QProcess::execute(PREFIX "/bin/om-feeling-like", QStringList() << preset) == 0);
+	QGuiApplication::restoreOverrideCursor();
+	return ok;
 }

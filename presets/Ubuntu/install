@@ -1,6 +1,6 @@
 killall latte-dock &>/dev/null
 rm -f ~/.config/autostart/org.kde.latte-dock.desktop
-lookandfeeltool -a org.openmandriva4.desktop
+lookandfeeltool -a United
 kwriteconfig5 --group Icons --key Theme Suru++
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSize Normal
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSizeAuto true
@@ -10,7 +10,7 @@ kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key library org.kde.k
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme __aurorae__svg__YaruKdeDark
 kwriteconfig5 --file kwinrc --group Windows --key Placement Maximizing
 kwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme Suru++
-kwriteconfig5 --file plasmarc --group Theme --key name Windows10
+kwriteconfig5 --file plasmarc --group Theme --key name UnityAmbiance
 kwriteconfig5 --group General --key widgetStyle kvantum
 kwriteconfig5 --file Kvantum/kvantum.kvconfig --group General --key theme KvAmbience
 kwriteconfig5 --group KDE --key widgetStyle kvantum
