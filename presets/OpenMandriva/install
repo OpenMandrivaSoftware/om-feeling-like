@@ -10,6 +10,7 @@ kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft MS
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight HIAX
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key library org.kde.breeze
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme Breeze
+kwriteconfig5 --file kwinrc --group Windows --key Placement Smart
 lwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme breeze_cursors
 kwriteconfig5 --group KDE --key buttonOrder --delete
 kwriteconfig5 --group KDE --key SingleClick true

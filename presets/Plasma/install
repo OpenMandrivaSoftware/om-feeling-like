@@ -2,6 +2,7 @@ killall latte-dock &>/dev/null
 rm -f ~/.config/autostart/org.kde.latte-dock.desktop
 kwriteconfig5 --group KDE --key SingleClick false
 kwriteconfig5 --group KDE --key buttonOrder --delete
+kwriteconfig5 --file kwinrc --group Windows --key Placement Smart
 kwriteconfig5 --file plasmarc --group Theme --key name default
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'theme="breeze-light"'
 lookandfeeltool -a org.kde.breeze.desktop

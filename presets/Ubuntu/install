@@ -1,37 +1,35 @@
 killall latte-dock &>/dev/null
 rm -f ~/.config/autostart/org.kde.latte-dock.desktop
-qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'theme="Seven-Black"'
 lookandfeeltool -a org.openmandriva4.desktop
-kwriteconfig5 --group Icons --key Theme Windows10
+kwriteconfig5 --group Icons --key Theme Suru++
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSize Normal
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key BorderSizeAuto true
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnLeft MS
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key ButtonsOnRight HIAX
 kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key library org.kde.kwin.aurorae
-kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme __aurorae__svg__seven-black
-kwriteconfig5 --file kwinrc --group Windows --key Placement Smart
-lwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme Windows10
+kwriteconfig5 --file kwinrc --group org.kde.kdecoration2 --key theme __aurorae__svg__YaruKdeDark
+kwriteconfig5 --file kwinrc --group Windows --key Placement Maximizing
+lwriteconfig5 --file kcminputrc --group Mouse --key cursorTheme Suru++
 kwriteconfig5 --file plasmarc --group Theme --key name Windows10
+kwriteconfig5 --group General --key widgetStyle kvantum
+kwriteconfig5 --file Kvantum/kvantum.kvconfig --group General --key theme KvAmbience
+kwriteconfig5 --group KDE --key widgetStyle kvantum
 kwriteconfig5 --group KDE --key SingleClick false
-kwriteconfig5 --group KDE --key buttonOrder windows
+kwriteconfig5 --group KDE --key buttonOrder gnome
 qdbus org.kde.KWin /KWin org.kde.KWin.reconfigure
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript 'while(panelIds.length) panelById(panelIds[0]).remove()'
 qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript '
 var panel = new Panel
-panel.location = "bottom";
-panel.height = gridUnit * 3;
-var launcher = panel.addWidget("org.kde.plasma.kickoff")
-launcher.currentConfigGroup = ["Shortcuts"]
-launcher.writeConfig("global", "Ctrl+Esc")
-launcher.currentConfigGroup = ["General"]
-launcher.writeConfig("favorites", "preferred://browser,org.kde.kmail.desktop,org.kde.konversation.desktop,kcm_kdeconnect.desktop,org.kde.dolphin.desktop,org.kde.kate.desktop,org.kde.konsole.desktop,systemsettings.desktop")
-launcher.writeConfig("showRecentContacts", "true")
-launcher.writeConfig("showRecentApps", "true")
-launcher.writeConfig("showRecentDocs", "true")
-launcher.writeConfig("icon", "/usr/share/icons/openmandriva.svg")
-var tasks = panel.addWidget("org.kde.plasma.icontasks")
-tasks.currentConfigGroup = ["General"]
-tasks.writeConfig("launchers", "applications:org.kde.falkon.desktop,applications:org.kde.dolphin.desktop")
+panel.location = "top";
+panel.height = gridUnit * 1.5;
+panel.addWidget("org.kde.plasma.activitybar")
+panel.addWidget("org.kde.plasma.panelspacer")
+var clock = panel.addWidget("org.kde.plasma.digitalclock")
+clock.currentConfigGroup = ["Appearance"]
+clock.writeConfig("showDate","true")
+clock.writeConfig("showWeekNumbers","false")
+clock.writeConfig("dateFormat", "localDate")
+clock.writeConfig("use24hFormat", "2")
 panel.addWidget("org.kde.plasma.panelspacer")
 var langIds = ["as",    // Assamese
                "bn",    // Bengali
@@ -68,11 +66,14 @@ var langIds = ["as",    // Assamese
 if (langIds.indexOf(languageId) != -1) {
         panel.addWidget("org.kde.plasma.kimpanel");
 }
-var systray = panel.addWidget("org.kde.plasma.systemtray")
-var clock = panel.addWidget("org.kde.plasma.digitalclock")
-clock.currentConfigGroup = ["Appearance"]
-clock.writeConfig("showDate","true")
-clock.writeConfig("showWeekNumbers","false")
-clock.writeConfig("dateFormat", "localDate")
-clock.writeConfig("use24hFormat", "2")
+panel.addWidget("org.kde.plasma.systemtray")
+panel.addWidget("org.kde.plasma.lock_logout")
+var panel2 = new Panel
+panel2.location = "left"
+panel2.height = gridUnit * 5
+var tasks=panel2.addWidget("org.kde.plasma.icontasks")
+tasks.currentConfigGroup = ["General"]
+tasks.writeConfig("launchers", "applications:org.kde.falkon.desktop,applications:org.kde.dolphin.desktop,applications:org.kde.elisa.desktop,applications:libreoffice-writer.desktop,applications:org.mageia.dnfdragora.desktop");
+panel2.addWidget("org.kde.plasma.panelspacer")
+panel2.addWidget("org.kde.plasma.kickerdash")
 '
